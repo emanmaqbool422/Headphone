@@ -1,0 +1,79 @@
+<div id="custom-product-overview" class="custom-split-images-section">
+  <div class="custom-split-image-item">
+    {%- if section.settings.image_1 != blank -%}
+      {{ section.settings.image_1 | image_url: width: 2000 | image_tag: class: 'custom-split-img', loading: 'lazy' }}
+    {%- else -%}
+      <img src="{{ 'Rave_D_Split_1.webp' | asset_url }}" class="custom-split-img" alt="Rave D Feature 1" loading="lazy" width="100%" height="auto">
+    {%- endif -%}
+  </div>
+  <div class="custom-split-image-item">
+    {%- if section.settings.image_2 != blank -%}
+      {{ section.settings.image_2 | image_url: width: 2000 | image_tag: class: 'custom-split-img', loading: 'lazy' }}
+    {%- else -%}
+      <img src="{{ 'Rave_D_Split_2.webp' | asset_url }}" class="custom-split-img" alt="Rave D Feature 2" loading="lazy" width="100%" height="auto">
+    {%- endif -%}
+  </div>
+  <div class="custom-split-image-item">
+    {%- if section.settings.image_3 != blank -%}
+      {{ section.settings.image_3 | image_url: width: 2000 | image_tag: class: 'custom-split-img', loading: 'lazy' }}
+    {%- else -%}
+      <img src="{{ 'Rave_D_Split_3.webp' | asset_url }}" class="custom-split-img" alt="Rave D Feature 3" loading="lazy" width="100%" height="auto">
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .custom-split-images-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+
+  .custom-split-image-item {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+  }
+
+  .custom-split-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0;
+    padding: 0;
+    object-fit: cover;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Split Images",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Split Images"
+    }
+  ]
+}
+{% endschema %}

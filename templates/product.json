@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "custom_product": {
+      "type": "custom-product",
+      "settings": {}
+    },
+    "custom_split_images": {
+      "type": "custom-split-images",
+      "settings": {}
+    },
+    "custom_details_faq": {
+      "type": "custom-details-faq",
+      "settings": {}
+    }
+  },
+  "order": [
+    "custom_product",
+    "custom_split_images",
+    "custom_details_faq"
+  ]
+}

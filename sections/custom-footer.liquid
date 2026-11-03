@@ -1,0 +1,558 @@
+{% comment %}
+  Custom Floating Card Footer Component
+  Matches reference design:
+  - Deep Navy Blue Card (#162248) with smooth rounded corners (40px)
+  - Navigation Columns: SHOP, COMPANY, CARE with curated page options
+  - Brand Block: RONiN Logo, Social Icons (FB, IG, YT, LI), "We're here to help.", Email Us (Phone number cut per user request)
+  - Newsletter: "Get exclusive offers and updates.", Pill input with white circular arrow submit button
+{% endcomment %}
+
+<div class="custom-footer-wrapper">
+  <footer class="custom-footer" aria-label="Footer Navigation">
+    <div class="custom-footer-inner">
+      
+      <!-- Left Navigation Columns -->
+      <div class="custom-footer-nav">
+        
+        <!-- Column 1: SHOP -->
+        <div class="custom-footer-col">
+          <h3 class="custom-footer-heading">{{ section.settings.shop_heading | default: 'SHOP' }}</h3>
+          <ul class="custom-footer-link-list">
+            {%- if section.settings.shop_menu != blank and linklists[section.settings.shop_menu].links.size > 0 -%}
+              {%- for link in linklists[section.settings.shop_menu].links -%}
+                <li><a href="{{ link.url }}" class="custom-footer-link">{{ link.title }}</a></li>
+              {%- endfor -%}
+            {%- else -%}
+              <li><a href="/collections/all" class="custom-footer-link">All Products</a></li>
+              <li><a href="/pages/product" class="custom-footer-link">Headphones</a></li>
+              <li><a href="/collections/all" class="custom-footer-link">Earbuds</a></li>
+              <li><a href="/collections/all" class="custom-footer-link">Handsfree</a></li>
+              <li><a href="/collections/all" class="custom-footer-link">Neckband</a></li>
+              <li><a href="/collections/all" class="custom-footer-link">Power Bank</a></li>
+            {%- endif -%}
+          </ul>
+        </div>
+
+        <!-- Column 2: COMPANY -->
+        <div class="custom-footer-col">
+          <h3 class="custom-footer-heading">{{ section.settings.company_heading | default: 'COMPANY' }}</h3>
+          <ul class="custom-footer-link-list">
+            {%- if section.settings.company_menu != blank and linklists[section.settings.company_menu].links.size > 0 -%}
+              {%- for link in linklists[section.settings.company_menu].links -%}
+                <li><a href="{{ link.url }}" class="custom-footer-link">{{ link.title }}</a></li>
+              {%- endfor -%}
+            {%- else -%}
+              <li><a href="/pages/about-us" class="custom-footer-link">About Us</a></li>
+              <li><a href="/pages/policy" class="custom-footer-link">Privacy Policy</a></li>
+              <li><a href="/pages/policy" class="custom-footer-link">Terms and Conditions</a></li>
+              <li><a href="/pages/contact" class="custom-footer-link">Contact Us</a></li>
+              <li><a href="/blogs/news" class="custom-footer-link">Blogs</a></li>
+            {%- endif -%}
+          </ul>
+        </div>
+
+        <!-- Column 3: CARE -->
+        <div class="custom-footer-col">
+          <h3 class="custom-footer-heading">{{ section.settings.care_heading | default: 'CARE' }}</h3>
+          <ul class="custom-footer-link-list">
+            {%- if section.settings.care_menu != blank and linklists[section.settings.care_menu].links.size > 0 -%}
+              {%- for link in linklists[section.settings.care_menu].links -%}
+                <li><a href="{{ link.url }}" class="custom-footer-link">{{ link.title }}</a></li>
+              {%- endfor -%}
+            {%- else -%}
+              <li><a href="/pages/order-track" class="custom-footer-link">Track Your Order</a></li>
+              <li><a href="/pages/policy" class="custom-footer-link">Warranty Policy</a></li>
+              <li><a href="/pages/policy" class="custom-footer-link">Exchange and Refund Policy</a></li>
+              <li><a href="/pages/policy" class="custom-footer-link">Shipping Policy</a></li>
+              <li><a href="/pages/contact" class="custom-footer-link">Register a Complaint</a></li>
+            {%- endif -%}
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Right Brand & Newsletter Column -->
+      <div class="custom-footer-brand">
+        <!-- Brand Logo -->
+        <div class="custom-footer-logo">
+          <a href="/" aria-label="RONIN Home">
+            {%- if section.settings.logo != blank -%}
+              {{ section.settings.logo | image_url: width: 280 | image_tag: class: 'custom-footer-logo-img', alt: shop.name }}
+            {%- else -%}
+              <img 
+                src="{{ 'logo.png' | asset_url }}" 
+                alt="RONIN Logo" 
+                class="custom-footer-logo-img"
+                height="32"
+                loading="lazy"
+              >
+            {%- endif -%}
+          </a>
+        </div>
+
+        <!-- Social Icons (Facebook, Instagram, YouTube, LinkedIn) -->
+        <div class="custom-footer-social">
+          <a href="{{ section.settings.facebook_url | default: 'https://facebook.com' }}" target="_blank" rel="noopener noreferrer" class="custom-footer-social-link" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+          <a href="{{ section.settings.instagram_url | default: 'https://instagram.com' }}" target="_blank" rel="noopener noreferrer" class="custom-footer-social-link" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="{{ section.settings.youtube_url | default: 'https://youtube.com' }}" target="_blank" rel="noopener noreferrer" class="custom-footer-social-link" aria-label="YouTube">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </a>
+          <a href="{{ section.settings.linkedin_url | default: 'https://linkedin.com' }}" target="_blank" rel="noopener noreferrer" class="custom-footer-social-link" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.65 1.65 0 1 0-.02-3.3 1.65 1.65 0 0 0 .02 3.3m1.4 9.74v-8.37H5.06v8.37h2.8z"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Help Info (Phone number removed per request) -->
+        <div class="custom-footer-help">
+          <p class="custom-footer-help-title">{{ section.settings.help_title | default: "We’re here to help." }}</p>
+          <div class="custom-footer-contact-row">
+            <svg class="custom-footer-mail-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <a href="mailto:{{ section.settings.email | default: 'Support@ronin.pk' }}" class="custom-footer-email-link">
+              Email Us: {{ section.settings.email | default: 'Support@ronin.pk' }}
+            </a>
+          </div>
+        </div>
+
+        <!-- Newsletter Subscription Form -->
+        <div class="custom-footer-newsletter">
+          <p class="custom-footer-newsletter-title">{{ section.settings.newsletter_title | default: 'Get exclusive offers and updates.' }}</p>
+          {%- form 'customer', id: 'CustomFooterNewsletterForm', class: 'custom-footer-form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="custom-footer-input-group">
+              <input 
+                type="email" 
+                name="contact[email]" 
+                class="custom-footer-input" 
+                placeholder="Email address" 
+                required 
+                autocomplete="email"
+                aria-label="Email address"
+              >
+              <button type="submit" class="custom-footer-submit-btn" aria-label="Subscribe to newsletter">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#162248" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+            {%- if form.posted_successfully? -%}
+              <p class="custom-footer-success">Thank you for subscribing!</p>
+            {%- endif -%}
+            {%- if form.errors -%}
+              <p class="custom-footer-error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+            {%- endif -%}
+          {%- endform -%}
+        </div>
+
+      </div>
+
+    </div>
+  </footer>
+</div>
+
+<style>
+  /* Footer Outer Wrapper */
+  .custom-footer-wrapper {
+    width: 100%;
+    max-width: min(var(--page-width, 1200px), 94%);
+    margin: 2.5rem auto 3rem auto;
+    box-sizing: border-box;
+  }
+
+  /* Deep Navy Card Container */
+  .custom-footer {
+    background-color: #162248;
+    border-radius: 40px;
+    color: #ffffff;
+    padding: 56px 64px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .custom-footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 48px;
+  }
+
+  /* Left Navigation Columns */
+  .custom-footer-nav {
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    gap: 68px;
+  }
+
+  .custom-footer-col {
+    min-width: 130px;
+  }
+
+  .custom-footer-heading {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0 0 22px 0;
+    line-height: 1.2;
+    font-family: inherit;
+  }
+
+  .custom-footer-link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .custom-footer-link {
+    color: #79869e;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .custom-footer-link:hover {
+    color: #ffffff;
+    transform: translateX(2px);
+  }
+
+  /* Right Brand & Contact Section */
+  .custom-footer-brand {
+    width: 330px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .custom-footer-logo-img {
+    height: 30px;
+    width: auto;
+    max-width: 150px;
+    display: block;
+    object-fit: contain;
+  }
+
+  /* Social Icons */
+  .custom-footer-social {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .custom-footer-social-link {
+    color: #79869e;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .custom-footer-social-link:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  /* Help Info */
+  .custom-footer-help {
+    margin-top: 26px;
+  }
+
+  .custom-footer-help-title {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+  }
+
+  .custom-footer-contact-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .custom-footer-mail-icon {
+    color: #79869e;
+    flex-shrink: 0;
+  }
+
+  .custom-footer-email-link {
+    color: #ffffff;
+    font-size: 13.5px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .custom-footer-email-link:hover {
+    opacity: 0.85;
+    text-decoration: underline;
+  }
+
+  /* Newsletter */
+  .custom-footer-newsletter {
+    margin-top: 28px;
+  }
+
+  .custom-footer-newsletter-title {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+  }
+
+  .custom-footer-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 9999px;
+    padding: 4px 5px 4px 18px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .custom-footer-input-group:focus-within {
+    border-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
+  }
+
+  .custom-footer-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: inherit;
+    padding: 7px 6px 7px 0;
+  }
+
+  .custom-footer-input::placeholder {
+    color: #79869e;
+  }
+
+  /* Circular White Arrow Submit Button */
+  .custom-footer-submit-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    padding: 0;
+    margin-left: 6px;
+  }
+
+  .custom-footer-submit-btn:hover {
+    transform: scale(1.06);
+    background-color: #f3f4f6;
+  }
+
+  .custom-footer-submit-btn svg {
+    stroke: #162248;
+  }
+
+  .custom-footer-success {
+    margin: 8px 0 0 14px;
+    font-size: 12px;
+    color: #4ade80;
+  }
+
+  .custom-footer-error {
+    margin: 8px 0 0 14px;
+    font-size: 12px;
+    color: #f87171;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .custom-footer {
+      padding: 46px 40px;
+      border-radius: 32px;
+    }
+
+    .custom-footer-inner {
+      flex-direction: column;
+      gap: 42px;
+    }
+
+    .custom-footer-nav {
+      width: 100%;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .custom-footer-brand {
+      width: 100%;
+      max-width: 380px;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .custom-footer {
+      padding: 36px 22px;
+      border-radius: 24px;
+    }
+
+    .custom-footer-nav {
+      flex-wrap: wrap;
+      gap: 32px 20px;
+    }
+
+    .custom-footer-col {
+      min-width: 120px;
+      flex: 1 1 42%;
+    }
+
+    .custom-footer-brand {
+      max-width: 100%;
+    }
+
+    .custom-footer-input-group {
+      padding: 3px 4px 3px 14px;
+    }
+
+    .custom-footer-submit-btn {
+      width: 34px;
+      height: 34px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Footer",
+  "tag": "footer",
+  "class": "section-custom-footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Navigation Menus"
+    },
+    {
+      "type": "text",
+      "id": "shop_heading",
+      "label": "Shop Column Heading",
+      "default": "SHOP"
+    },
+    {
+      "type": "link_list",
+      "id": "shop_menu",
+      "label": "Shop Menu (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "company_heading",
+      "label": "Company Column Heading",
+      "default": "COMPANY"
+    },
+    {
+      "type": "link_list",
+      "id": "company_menu",
+      "label": "Company Menu (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "care_heading",
+      "label": "Care Column Heading",
+      "default": "CARE"
+    },
+    {
+      "type": "link_list",
+      "id": "care_menu",
+      "label": "Care Menu (Optional)"
+    },
+    {
+      "type": "header",
+      "content": "Branding & Contact"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Custom Footer Logo"
+    },
+    {
+      "type": "text",
+      "id": "help_title",
+      "label": "Help Title",
+      "default": "We’re here to help."
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Support Email",
+      "default": "Support@ronin.pk"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter Title",
+      "default": "Get exclusive offers and updates."
+    },
+    {
+      "type": "header",
+      "content": "Social Links"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook Link"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram Link"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube Link"
+    },
+    {
+      "type": "url",
+      "id": "linkedin_url",
+      "label": "LinkedIn Link"
+    }
+  ]
+}
+{% endschema %}
